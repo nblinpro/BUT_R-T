@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projet IoT : Architectures Hybrides | Nicolas</title>
+    <link rel="stylesheet" href="../../../style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo">Nicolas<span>.infra</span></div>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Accueil</a></li>
+                <li><a href="projets.html" style="color:var(--accent)">Projets</a></li>
+                <li><a href="mailto:nblin01@protonmail.com" class="btn btn-primary" style="padding: 0.5rem 1rem;">Me Contacter</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero" style="min-height: 40vh; align-items: flex-start; text-align: left;">
+            <span class="hero-tag">IoT • ESP32 • LoRa • BLE</span>
+            <h1>Architectures Réseaux <br><span style="color:var(--accent)">Hybrides pour l'IoT</span></h1>
+            <p style="max-width: 800px;">
+                Conception, mise en œuvre et comparaison de solutions de communication sans fil (Bluetooth, BLE, LoRa) pour un environnement de capteurs connectés.
+            </p>
+            <div class="tags">
+                <span class="tag">ESP32</span>
+                <span class="tag">C++ / Arduino</span>
+                <span class="tag">ThingSpeak</span>
+                <span class="tag">Électronique</span>
+            </div>
+        </section>
+
+        <section>
+            <h2><i class="fas fa-project-diagram"></i> Contexte & Objectifs</h2>
+            <div class="card">
+                <p>
+                    L'objectif principal était de concevoir un système complet de collecte de données environnementales. Le projet repose sur l'utilisation de plusieurs technologies de transmission intégrées à des microcontrôleurs <strong>ESP32</strong>.
+                </p>
+                <h3 style="font-size: 1.1rem; margin-top: 1.5rem; color: var(--text-main);">Fonctionnalités de l'architecture :</h3>
+                <ul style="list-style: none; color: var(--text-muted); margin-top: 0.5rem;">
+                    <li><i class="fas fa-check" style="color:var(--code-text); margin-right: 10px;"></i> <strong>Collecte :</strong> Température via capteur KY-013 (Thermistance NTC).</li>
+                    <li><i class="fas fa-check" style="color:var(--code-text); margin-right: 10px;"></i> <strong>Alerte :</strong> Signal sonore via buzzer KY-012 si seuil dépassé.</li>
+                    <li><i class="fas fa-check" style="color:var(--code-text); margin-right: 10px;"></i> <strong>Transmission :</strong> Hybride (Bluetooth, BLE, LoRa).</li>
+                    <li><i class="fas fa-check" style="color:var(--code-text); margin-right: 10px;"></i> <strong>Visualisation :</strong> Locale (OLED) et Cloud (ThingSpeak).</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2><i class="fas fa-cogs"></i> Réalisations Techniques</h2>
+            <div class="grid">
+                
+                <article class="card">
+                    <span class="hero-tag" style="margin-bottom: 0.5rem;">Étape 1</span>
+                    <h3>Étude des Composants</h3>
+                    <p style="font-size: 0.9rem;">Analyse technique des composants tirés au sort :</p>
+                    <ul style="font-size: 0.85rem; padding-left: 1rem; color: var(--text-muted);">
+                        <li><strong>KY-013 :</strong> Mesure de -55°C à +125°C.</li>
+                        <li><strong>KY-012 :</strong> Buzzer actif pour alertes.</li>
+                        <li><strong>ESP32 :</strong> Gestion Wi-Fi/LoRa/BLE.</li>
+                        <li><strong>OLED :</strong> Affichage local.</li>
+                    </ul>
+                </article>
+
+                <article class="card">
+                    <span class="hero-tag" style="margin-bottom: 0.5rem;">Étape 2</span>
+                    <h3>Montage & Intégration</h3>
+                    <p style="font-size: 0.9rem;">Câblage complet sur breadboard et programmation de la logique conditionnelle.</p>
+                    <div style="background: #000; height: 100px; border-radius: 4px; display: flex; align-items: center; justify-content: center; border: 1px dashed var(--border); margin-top: 10px;">
+                        <span style="color: var(--text-muted); font-size: 0.8rem;"><i class="fas fa-camera"></i> Photo Montage IoT</span>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <span class="hero-tag" style="margin-bottom: 0.5rem;">Étape 3</span>
+                    <h3>Dév. Communications</h3>
+                    <p style="font-size: 0.9rem;">Programmation des modes hybrides :</p>
+                    <ul style="font-size: 0.85rem; padding-left: 1rem; color: var(--text-muted);">
+                        <li>Communication Emetteur ↔ Récepteur.</li>
+                        <li>Relais des données vers le Cloud.</li>
+                        <li>Dashboard <strong>ThingSpeak</strong>.</li>
+                    </ul>
+                </article>
+
+                <article class="card">
+                    <span class="hero-tag" style="margin-bottom: 0.5rem;">Étape 4</span>
+                    <h3>Tests Performances</h3>
+                    <p style="font-size: 0.9rem;">Campagne de mesures (Champs & Ville) :</p>
+                    <ul style="font-size: 0.85rem; padding-left: 1rem; color: var(--text-muted);">
+                        <li>Relevés RSSI (Qualité signal).</li>
+                        <li>Comparatif portée/stabilité.</li>
+                        <li>Impact de l'environnement (Urbain vs Rural).</li>
+                    </ul>
+                </article>
+
+                <article class="card">
+                    <span class="hero-tag" style="margin-bottom: 0.5rem;">Étape 5</span>
+                    <h3>Conso. Énergétique</h3>
+                    <p style="font-size: 0.9rem;">Mesures à l'oscilloscope avec résistance calibrée.</p>
+                    <p style="font-size: 0.85rem; color: var(--text-muted);">Analyse de l'impact du <strong>Spreading Factor (SF)</strong> en LoRa sur la consommation.</p>
+                </article>
+
+                <article class="card">
+                    <span class="hero-tag" style="margin-bottom: 0.5rem;">Étape 6</span>
+                    <h3>Autonomie</h3>
+                    <p style="font-size: 0.9rem;">Calcul théorique et réel de la durée de vie sur batterie.</p>
+                    <p style="font-size: 0.85rem; color: var(--text-muted);">Mise en évidence de l'efficacité du BLE pour les cas d'usage basse consommation.</p>
+                </article>
+
+            </div>
+        </section>
+
+        <section>
+            <h2><i class="fas fa-bug"></i> Retour d'expérience : Le problème "NAN"</h2>
+            <div class="card" style="border-left: 4px solid #ef4444;">
+                <h3 style="color: #ef4444;">Dysfonctionnement Capteur KY-013</h3>
+                <p>
+                    Lors de l’utilisation d’un code de base sur la carte Heltec, la console affichait <code>NAN</code> (Not A Number). Ce dysfonctionnement rendait impossible l'exploitation des températures.
+                </p>
+                
+                <h4 style="font-size: 1rem; margin-top: 1rem; color: var(--text-main);">Solution mise en œuvre :</h4>
+                <ul style="list-style: none; margin-top: 0.5rem;">
+                    <li><i class="fas fa-check-circle" style="color: var(--code-text);"></i> Utilisation de la valeur absolue de la résistance avant le calcul logarithmique.</li>
+                    <li><i class="fas fa-check-circle" style="color: var(--code-text);"></i> Ajustement de la formule de conversion (Steinhart-Hart) pour la cohérence physique.</li>
+                </ul>
+                <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-muted);">
+                    <em>Le diagnostic complet et les formules mathématiques corrigées sont disponibles dans le rapport ci-dessous.</em>
+                </p>
+            </div>
+        </section>
+
+        <section id="downloads" style="text-align: center; margin-bottom: 4rem;">
+            <h2>Rapport & Présentation</h2>
+            <p>Accédez aux livrables complets du projet.</p>
+            <div class="btn-group" style="justify-content: center;">
+                <a href="../documents/livrable_Qualification_Architecture_Réseau_IoT.pdf" target="_blank" class="btn btn-primary">
+                    <i class="fas fa-file-pdf"></i> Télécharger le Rapport
+                </a>
+                <a href="../documents/Diaporama_Qualification_Architecture_Réseau_IoT.pdf" target="_blank" class="btn btn-outline">
+                    <i class="fas fa-file-powerpoint"></i> Voir le Diaporama
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2023-2025 BLIN Nicolas. Tous droits réservés.</p>
+        <div style="margin-top: 10px; font-size: 0.9rem; color: var(--text-muted);">
+            <i class="fas fa-phone"></i> 06 62 48 34 99 &nbsp;|&nbsp; 
+            <i class="fas fa-envelope"></i> nblin01@protonmail.com
+        </div>
+        <div style="margin-top: 15px;">
+            <a href="projets.html" style="color: var(--accent); text-decoration: none;">
+                <i class="fas fa-arrow-left"></i> Retour aux projets
+            </a>
+        </div>
+    </footer>
+
+</body>
+</html>
