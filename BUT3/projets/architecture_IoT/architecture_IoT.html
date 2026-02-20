@@ -51,6 +51,24 @@
         .breadcrumb i { font-size: 0.7rem; opacity: 0.5; }
         .breadcrumb span { color: var(--accent); font-weight: 600; }
         main { max-width: 1200px; margin: 0 auto; padding: 40px 8% 80px; }
+        /* --- STYLE GALERIE ETAPES --- */
+        .component-gallery {
+            display: flex;
+            gap: 15px;
+            justify-content: space-between;
+            width: 100%;
+        }
+        .component-gallery img {
+            width: calc(33.33% - 10px);
+            height: 250px;
+            object-fit: contain;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            padding: 15px;
+            transition: 0.3s;
+        }
+        .component-gallery img:hover { border-color: var(--accent); transform: scale(1.02); }
         /* --- PRESENTATION STRUCTURE --- */
         .intro-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 40px; align-items: center; margin-bottom: 80px; }
         .intro-text h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 20px; line-height: 1.1; }
@@ -133,7 +151,7 @@
                 </ul>
             </div>
             <div class="img-placeholder">
-                <img src="votre-image-structure.jpg" alt="Schéma de l'architecture">
+                <img src="images/archi_IoT.png" alt="Schéma de l'architecture">
             </div>
         </section>
         <section class="skills-section">
@@ -186,7 +204,11 @@
                     <h3>Étude des composants</h3>
                     <p style="color: var(--text-muted);">Analyse du capteur KY-013 (-55°C à +125°C), du buzzer KY-012 et spécifications du microcontrôleur ESP32.</p>
                 </div>
-                <div class="step-img"><img src="etape1.jpg" alt="Etape 1"></div>
+                <div class="component-gallery">
+                    <img src="images/esp32.png" alt="ESP32">
+                    <img src="images/ky_013.png" alt="Capteur KY-013">
+                    <img src="images/ky_012.png" alt="Buzzer KY-012">
+                </div>
             </div>
             <div class="step-row">
                 <div class="step-content">
@@ -241,7 +263,7 @@
 <footer>
     <div class="footer-top">
         <div class="footer-col">
-            <div class="footer-logo">Nicolas<span>.arch</span></div>
+            <div class="footer-logo">Nicolas<span>.SI</span></div>
             <p style="font-size: 0.9rem; color: var(--text-muted);">Architecte des SI spécialisé dans la conception d'infrastructures hautement disponibles.</p>
         </div>
         <div class="footer-col">
