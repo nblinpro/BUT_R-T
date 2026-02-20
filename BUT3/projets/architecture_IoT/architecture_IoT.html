@@ -51,6 +51,17 @@
         .breadcrumb i { font-size: 0.7rem; opacity: 0.5; }
         .breadcrumb span { color: var(--accent); font-weight: 600; }
         main { max-width: 1200px; margin: 0 auto; padding: 40px 8% 80px; }
+
+        /* --- HERO --- */
+        .hero { padding: 1rem 8% 2rem; text-align: center; }
+        .hero-tag {
+            background: rgba(34, 211, 238, 0.1); color: var(--accent);
+            padding: 6px 15px; border-radius: 20px; font-size: 0.75rem; font-weight: 700;
+            letter-spacing: 1px; border: 1px solid var(--accent-glow); margin-bottom: 1rem; display: inline-block;
+        }
+        h1 { font-size: 2.8rem; margin-bottom: 1rem; }
+        .hero p { color: var(--text-muted); max-width: 600px; margin: 0 auto; }
+
         /* --- PRESENTATION STRUCTURE --- */
         .intro-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px; align-items: center; margin-bottom: 80px; }
         .intro-text h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 20px; line-height: 1.1; }
@@ -218,10 +229,15 @@
             <i class="fas fa-chevron-right" style="font-size: 0.6rem;"></i>
             <span style="color: var(--accent);">Architecture Réseaux IoT</span>
         </nav>
+        
+        <section class="hero">
+            <span class="hero-tag"><i class="fa-solid fa-microchip"></i> RÉALISATIONS</span>
+            <h1>Qualification d'Architectures <br><span style="color: var(--accent)">Réseaux Hybrides IoT</span></h1>
+            <p>Découvrez mon analyse comparative des protocoles sans fil (Bluetooth, BLE, LoRa) pour environnements IoT critiques.</p>
+        </section>
 
         <section class="intro-grid">
             <div class="intro-text">
-                <h1>Qualification d'Architectures <br><span style="color: var(--accent)">Réseaux Hybrides IoT</span></h1>
                 <p>L'architecture mise en place permettait de :</p>
                 <ul class="archi-list">
                     <li><i class="fas fa-temperature-high"></i> Collecter la température à l'aide du capteur KY-013 (thermistance NTC)</li>
