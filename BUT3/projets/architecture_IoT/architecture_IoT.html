@@ -3,164 +3,224 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projet IoT : Architectures Hybrides | Nicolas</title>
-    <link rel="stylesheet" href="../../../style.css">
+    <title>Architecture Réseaux IoT | Nicolas Blin</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #030712;
+            --card-bg: rgba(17, 24, 39, 0.4);
+            --border: rgba(255, 255, 255, 0.08);
+            --accent: #22d3ee;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background-color: var(--bg); color: var(--text-main); line-height: 1.6; overflow-x: hidden; }
+        /* --- FOND AMBIANT --- */
+        .ambient-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 0%, rgba(34, 211, 238, 0.05) 0%, transparent 50%);
+            z-index: -1;
+        }
+        header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1.2rem 8%; position: sticky; top: 0; 
+            background: rgba(3, 7, 18, 0.6); backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border); z-index: 1000;
+        }
+        .logo { font-weight: 800; font-size: 1.4rem; letter-spacing: -1px; text-decoration: none; color: white; }
+        .logo span { color: var(--accent); }
+        /* --- BREADCRUMB --- */
+        .breadcrumb { display: flex; gap: 10px; font-size: 0.8rem; color: var(--text-muted); margin: 30px 8% 0; align-items: center; }
+        .breadcrumb a { color: inherit; text-decoration: none; transition: 0.3s; }
+        .breadcrumb a:hover { color: var(--accent); }
+        main { max-width: 1200px; margin: 0 auto; padding: 40px 8% 80px; }
+        /* --- HERO --- */
+        .hero-project { text-align: center; margin-bottom: 60px; }
+        .hero-project h1 { font-size: clamp(1.8rem, 5vw, 2.8rem); font-weight: 800; letter-spacing: -2px; margin-bottom: 20px; line-height: 1.2; }
+        .hero-project p { color: var(--text-muted); font-size: 1.1rem; max-width: 900px; margin: 0 auto; }
+        .hero-tag { font-family: 'JetBrains Mono'; font-size: 0.75rem; color: var(--accent); background: rgba(34, 211, 238, 0.1); padding: 4px 12px; border-radius: 100px; border: 1px solid rgba(34, 211, 238, 0.3); margin-bottom: 1.5rem; display: inline-block; }
+        /* --- SECTIONS --- */
+        .section-title { font-size: 1.6rem; font-weight: 700; margin: 60px 0 30px; display: flex; align-items: center; gap: 15px; }
+        .section-title i { color: var(--accent); }
+        /* --- STEP GRID --- */
+        .step-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+        .step-card {
+            background: var(--card-bg); border: 1px solid var(--border);
+            padding: 2rem; border-radius: 16px; position: relative;
+            transition: 0.3s;
+        }
+        .step-card:hover { border-color: var(--accent); transform: translateY(-5px); }
+        .step-number { font-family: 'JetBrains Mono'; color: var(--accent); font-size: 3rem; font-weight: 800; opacity: 0.2; position: absolute; top: 10px; right: 20px; }
+        .step-card h3 { font-size: 1.2rem; margin-bottom: 1rem; color: var(--accent); }
+        .step-card ul { list-style: none; font-size: 0.9rem; color: var(--text-muted); }
+        .step-card ul li { margin-bottom: 10px; display: flex; gap: 10px; }
+        .step-card ul li::before { content: "→"; color: var(--accent); }
+        /* --- COMPETENCES --- */
+        .skills-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+        .skill-box { background: rgba(255,255,255,0.02); border: 1px solid var(--border); padding: 1.5rem; border-radius: 12px; }
+        .skill-box h4 { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem; color: var(--accent); }
+        /* --- LIVRABLES --- */
+        .download-zone { 
+            display: flex; gap: 1.5rem; margin-top: 40px; flex-wrap: wrap;
+            background: linear-gradient(135deg, rgba(34, 211, 238, 0.05), transparent);
+            padding: 30px; border-radius: 16px; border: 1px solid var(--border);
+        }
+        .btn-download {
+            background: var(--text-main); color: var(--bg); padding: 12px 24px;
+            border-radius: 8px; text-decoration: none; font-weight: 700;
+            display: flex; align-items: center; gap: 10px; transition: 0.3s;
+        }
+        .btn-download:hover { transform: scale(1.05); background: var(--accent); }
+                /* --- FOOTER UNIFIÉ --- */
+        footer { padding: 4rem 8% 2rem; background: var(--bg-card); border-top: 1px solid var(--border); margin-top: 5rem; }
+        .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 4rem; margin-bottom: 3rem; text-align: left; }
+        .footer-logo { font-weight: 800; margin-bottom: 1rem; font-size: 1.2rem; }
+        .footer-col h4 { margin-bottom: 1.5rem; font-size: 1rem; color: var(--text-main); }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 10px; }
+        .footer-col a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; transition: 0.3s; }
+        .footer-col a:hover { color: var(--accent); }
+        .social-links { display: flex; gap: 1rem; }
+        .social-btn { width: 40px; height: 40px; border-radius: 8px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--text-muted); text-decoration: none; transition: 0.3s; }
+        .social-btn:hover { border-color: var(--accent); color: var(--accent); background: rgba(34, 211, 238, 0.05); }
+        .footer-bottom { padding-top: 2rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-muted); }
+        @media (max-width: 768px) { .hero-project h1 { font-size: 2rem; } .breadcrumb { margin: 20px 5% 0; } }
+    </style>
 </head>
 <body>
-
+    <div class="ambient-bg"></div>
     <header>
-        <div class="logo">Nicolas<span>.infra</span></div>
-        <nav>
-            <ul>
-                <li><a href="../index.html">Accueil</a></li>
-                <li><a href="projets.html" style="color:var(--accent)">Projets</a></li>
-                <li><a href="mailto:nblin01@protonmail.com" class="btn btn-primary" style="padding: 0.5rem 1rem;">Me Contacter</a></li>
-            </ul>
-        </nav>
+        <a href="../index.html" class="logo">Nicolas<span>.arch</span></a>
+        <nav><a href="projets.html" style="color: var(--text-muted); text-decoration:none; font-size: 0.9rem;">← Retour</a></nav>
     </header>
-
+    <nav class="breadcrumb">
+        <a href="../index.html">Accueil</a> <i class="fas fa-chevron-right" style="font-size: 0.6rem;"></i>
+        <a href="projets.html">Projets</a> <i class="fas fa-chevron-right" style="font-size: 0.6rem;"></i>
+        <span>Architecture Réseaux IoT</span>
+    </nav>
     <main>
-        <section class="hero" style="min-height: 40vh; align-items: flex-start; text-align: left;">
-            <span class="hero-tag">IoT • ESP32 • LoRa • BLE</span>
-            <h1>Architectures Réseaux <br><span style="color:var(--accent)">Hybrides pour l'IoT</span></h1>
-            <p style="max-width: 800px;">
-                Conception, mise en œuvre et comparaison de solutions de communication sans fil (Bluetooth, BLE, LoRa) pour un environnement de capteurs connectés.
-            </p>
-            <div class="tags">
-                <span class="tag">ESP32</span>
-                <span class="tag">C++ / Arduino</span>
-                <span class="tag">ThingSpeak</span>
-                <span class="tag">Électronique</span>
-            </div>
+        <section class="hero-project">
+            <span class="hero-tag">R&D / Systèmes Embarqués</span>
+            <h1>Qualification d'Architectures <br><span style="color: var(--accent)">Réseaux Hybrides IoT</span></h1>
+            <p>Conception et analyse comparative de solutions de communication sans fil (Bluetooth, BLE, LoRa) pour environnements connectés via microcontrôleurs ESP32.</p>
         </section>
-
-        <section>
-            <h2><i class="fas fa-project-diagram"></i> Contexte & Objectifs</h2>
-            <div class="card">
-                <p>
-                    L'objectif principal était de concevoir un système complet de collecte de données environnementales. Le projet repose sur l'utilisation de plusieurs technologies de transmission intégrées à des microcontrôleurs <strong>ESP32</strong>.
-                </p>
-                <h3 style="font-size: 1.1rem; margin-top: 1.5rem; color: var(--text-main);">Fonctionnalités de l'architecture :</h3>
-                <ul style="list-style: none; color: var(--text-muted); margin-top: 0.5rem;">
-                    <li><i class="fas fa-check" style="color:var(--code-text); margin-right: 10px;"></i> <strong>Collecte :</strong> Température via capteur KY-013 (Thermistance NTC).</li>
-                    <li><i class="fas fa-check" style="color:var(--code-text); margin-right: 10px;"></i> <strong>Alerte :</strong> Signal sonore via buzzer KY-012 si seuil dépassé.</li>
-                    <li><i class="fas fa-check" style="color:var(--code-text); margin-right: 10px;"></i> <strong>Transmission :</strong> Hybride (Bluetooth, BLE, LoRa).</li>
-                    <li><i class="fas fa-check" style="color:var(--code-text); margin-right: 10px;"></i> <strong>Visualisation :</strong> Locale (OLED) et Cloud (ThingSpeak).</li>
+        <h2 class="section-title"><i class="fas fa-microchip"></i> Mes Réalisations Techniques</h2>
+        <div class="step-grid">
+            <div class="step-card">
+                <span class="step-number">01</span>
+                <h3>Étude des Composants</h3>
+                <ul>
+                    <li>Analyse du capteur de température KY-013 (Thermistance NTC)</li>
+                    <li>Maîtrise du microcontrôleur ESP32 (Wi-Fi, BT, LoRa)</li>
+                    <li>Intégration d'écrans OLED pour l'affichage local</li>
                 </ul>
             </div>
-        </section>
-
-        <section>
-            <h2><i class="fas fa-cogs"></i> Réalisations Techniques</h2>
-            <div class="grid">
-                
-                <article class="card">
-                    <span class="hero-tag" style="margin-bottom: 0.5rem;">Étape 1</span>
-                    <h3>Étude des Composants</h3>
-                    <p style="font-size: 0.9rem;">Analyse technique des composants tirés au sort :</p>
-                    <ul style="font-size: 0.85rem; padding-left: 1rem; color: var(--text-muted);">
-                        <li><strong>KY-013 :</strong> Mesure de -55°C à +125°C.</li>
-                        <li><strong>KY-012 :</strong> Buzzer actif pour alertes.</li>
-                        <li><strong>ESP32 :</strong> Gestion Wi-Fi/LoRa/BLE.</li>
-                        <li><strong>OLED :</strong> Affichage local.</li>
-                    </ul>
-                </article>
-
-                <article class="card">
-                    <span class="hero-tag" style="margin-bottom: 0.5rem;">Étape 2</span>
-                    <h3>Montage & Intégration</h3>
-                    <p style="font-size: 0.9rem;">Câblage complet sur breadboard et programmation de la logique conditionnelle.</p>
-                    <div style="background: #000; height: 100px; border-radius: 4px; display: flex; align-items: center; justify-content: center; border: 1px dashed var(--border); margin-top: 10px;">
-                        <span style="color: var(--text-muted); font-size: 0.8rem;"><i class="fas fa-camera"></i> Photo Montage IoT</span>
-                    </div>
-                </article>
-
-                <article class="card">
-                    <span class="hero-tag" style="margin-bottom: 0.5rem;">Étape 3</span>
-                    <h3>Dév. Communications</h3>
-                    <p style="font-size: 0.9rem;">Programmation des modes hybrides :</p>
-                    <ul style="font-size: 0.85rem; padding-left: 1rem; color: var(--text-muted);">
-                        <li>Communication Emetteur ↔ Récepteur.</li>
-                        <li>Relais des données vers le Cloud.</li>
-                        <li>Dashboard <strong>ThingSpeak</strong>.</li>
-                    </ul>
-                </article>
-
-                <article class="card">
-                    <span class="hero-tag" style="margin-bottom: 0.5rem;">Étape 4</span>
-                    <h3>Tests Performances</h3>
-                    <p style="font-size: 0.9rem;">Campagne de mesures (Champs & Ville) :</p>
-                    <ul style="font-size: 0.85rem; padding-left: 1rem; color: var(--text-muted);">
-                        <li>Relevés RSSI (Qualité signal).</li>
-                        <li>Comparatif portée/stabilité.</li>
-                        <li>Impact de l'environnement (Urbain vs Rural).</li>
-                    </ul>
-                </article>
-
-                <article class="card">
-                    <span class="hero-tag" style="margin-bottom: 0.5rem;">Étape 5</span>
-                    <h3>Conso. Énergétique</h3>
-                    <p style="font-size: 0.9rem;">Mesures à l'oscilloscope avec résistance calibrée.</p>
-                    <p style="font-size: 0.85rem; color: var(--text-muted);">Analyse de l'impact du <strong>Spreading Factor (SF)</strong> en LoRa sur la consommation.</p>
-                </article>
-
-                <article class="card">
-                    <span class="hero-tag" style="margin-bottom: 0.5rem;">Étape 6</span>
-                    <h3>Autonomie</h3>
-                    <p style="font-size: 0.9rem;">Calcul théorique et réel de la durée de vie sur batterie.</p>
-                    <p style="font-size: 0.85rem; color: var(--text-muted);">Mise en évidence de l'efficacité du BLE pour les cas d'usage basse consommation.</p>
-                </article>
-
-            </div>
-        </section>
-
-        <section>
-            <h2><i class="fas fa-bug"></i> Retour d'expérience : Le problème "NAN"</h2>
-            <div class="card" style="border-left: 4px solid #ef4444;">
-                <h3 style="color: #ef4444;">Dysfonctionnement Capteur KY-013</h3>
-                <p>
-                    Lors de l’utilisation d’un code de base sur la carte Heltec, la console affichait <code>NAN</code> (Not A Number). Ce dysfonctionnement rendait impossible l'exploitation des températures.
-                </p>
-                
-                <h4 style="font-size: 1rem; margin-top: 1rem; color: var(--text-main);">Solution mise en œuvre :</h4>
-                <ul style="list-style: none; margin-top: 0.5rem;">
-                    <li><i class="fas fa-check-circle" style="color: var(--code-text);"></i> Utilisation de la valeur absolue de la résistance avant le calcul logarithmique.</li>
-                    <li><i class="fas fa-check-circle" style="color: var(--code-text);"></i> Ajustement de la formule de conversion (Steinhart-Hart) pour la cohérence physique.</li>
+            <div class="step-card">
+                <span class="step-number">02</span>
+                <h3>Montage & Logique</h3>
+                <ul>
+                    <li>Interfaçage complet capteurs/actionneurs sur ESP32</li>
+                    <li>Programmation de la logique conditionnelle d'alerte ( KY-012 Buzzer)</li>
+                    <li>Développement du système d'affichage en temps réel</li>
                 </ul>
-                <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-muted);">
-                    <em>Le diagnostic complet et les formules mathématiques corrigées sont disponibles dans le rapport ci-dessous.</em>
-                </p>
             </div>
-        </section>
-
-        <section id="downloads" style="text-align: center; margin-bottom: 4rem;">
-            <h2>Rapport & Présentation</h2>
-            <p>Accédez aux livrables complets du projet.</p>
-            <div class="btn-group" style="justify-content: center;">
-                <a href="../documents/livrable_Qualification_Architecture_Réseau_IoT.pdf" target="_blank" class="btn btn-primary">
-                    <i class="fas fa-file-pdf"></i> Télécharger le Rapport
-                </a>
-                <a href="../documents/Diaporama_Qualification_Architecture_Réseau_IoT.pdf" target="_blank" class="btn btn-outline">
-                    <i class="fas fa-file-powerpoint"></i> Voir le Diaporama
-                </a>
+            <div class="step-card">
+                <span class="step-number">03</span>
+                <h3>Communications Hybrides</h3>
+                <ul>
+                    <li>Programmation des protocoles Bluetooth Classic et BLE</li>
+                    <li>Implémentation de liaisons longue portée LoRa</li>
+                    <li>Relais de données vers la plateforme Cloud ThingSpeak</li>
+                </ul>
             </div>
-        </section>
-
+            <div class="step-card">
+                <span class="step-number">04</span>
+                <h3>Tests de Performance</h3>
+                <ul>
+                    <li>Mesures RSSI en environnement urbain et rural</li>
+                    <li>Analyse de la stabilité du signal selon la distance</li>
+                    <li>Benchmarking des débits et latences</li>
+                </ul>
+            </div>
+            <div class="step-card">
+                <span class="step-number">05</span>
+                <h3>Analyse Énergétique</h3>
+                <ul>
+                    <li>Mesures à l'oscilloscope sur résistance calibrée</li>
+                    <li>Impact du Spreading Factor (SF) sur la consommation LoRa</li>
+                    <li>Comparatif de l'empreinte énergétique par protocole</li>
+                </ul>
+            </div>
+            <div class="step-card">
+                <span class="step-number">06</span>
+                <h3>Évaluation de l'Autonomie</h3>
+                <ul>
+                    <li>Calculs théoriques vs mesures réelles de longévité</li>
+                    <li>Optimisation des cycles de mise en veille (Deep Sleep)</li>
+                    <li>Analyse des compromis Portée / Énergie</li>
+                </ul>
+            </div>
+        </div>
+      <h2 class="section-title"><i class="fas fa-tasks"></i> Compétences Mobilisées</h2>     
+        <div class="skills-container">
+            <div class="skill-box">
+                <h4>IoT & Embarqué</h4>
+                <ul style="list-style: none; font-size: 0.85rem; color: var(--text-muted);">
+                    <li>• C/C++ (Arduino IDE)</li>
+                    <li>• Protocoles LoRa / BLE / BT</li>
+                    <li>• Cloud ThingSpeak</li>
+                </ul>
+            </div>
+            <div class="skill-box">
+                <h4>Mesures & Analyse</h4>
+                <ul style="list-style: none; font-size: 0.85rem; color: var(--text-muted);">
+                    <li>• Diagnostic Oscilloscope</li>
+                    <li>• Analyse RSSI</li>
+                    <li>• Calculs d'autonomie</li>
+                </ul>
+            </div>
+            <div class="skill-box">
+                <h4>Gestion de Projet</h4>
+                <ul style="list-style: none; font-size: 0.85rem; color: var(--text-muted);">
+                    <li>• Diagrammes de Gantt</li>
+                    <li>• Documentation Technique</li>
+                    <li>• Adaptation aux imprévus</li>
+                </ul>
+            </div>
+        </div>
+        <h2 class="section-title"><i class="fas fa-file-pdf"></i> Livrables du Projet</h2>
+        <div class="download-zone">
+            <a href="#" class="btn-download"><i class="fas fa-file-pdf"></i> Rapport Technique</a>
+            <a href="#" class="btn-download"><i class="fas fa-presentation-screen"></i> Diaporama Final</a>
+        </div>
     </main>
-
-    <footer>
-        <p>&copy; 2023-2025 BLIN Nicolas. Tous droits réservés.</p>
-        <div style="margin-top: 10px; font-size: 0.9rem; color: var(--text-muted);">
-            <i class="fas fa-phone"></i> 06 62 48 34 99 &nbsp;|&nbsp; 
-            <i class="fas fa-envelope"></i> nblin01@protonmail.com
+<footer>
+    <div class="footer-top">
+        <div class="footer-col">
+            <div class="footer-logo">Nicolas<span>.arch</span></div>
+            <p style="font-size: 0.9rem; color: var(--text-muted);">Architecte des SI spécialisé dans la conception d'infrastructures hautement disponibles.</p>
         </div>
-        <div style="margin-top: 15px;">
-            <a href="projets.html" style="color: var(--accent); text-decoration: none;">
-                <i class="fas fa-arrow-left"></i> Retour aux projets
-            </a>
+        <div class="footer-col">
+            <h4>Navigation</h4>
+            <ul>
+                <li><a href="https://nblinpro.github.io/portfolio/index.html">Accueil</a></li>
+                <li><a href="https://nblinpro.github.io/portfolio/pages/parcours.html">Parcours</a></li>
+                <li><a href="https://nblinpro.github.io/portfolio/pages/projets.html">Projets</a></li>
+                <li><a href="https://nblinpro.github.io/portfolio/pages/contact.html">Contact</a></li>
+            </ul>
         </div>
-    </footer>
+        <div class="footer-col">
+            <h4>Contact</h4>
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/nicolas-blin-6a5135218/" class="social-btn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="mailto:nicolas.blin.pro1@gmail.com" class="social-btn"><i class="far fa-envelope"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>© 2026 Nicolas Blin | Expert Architecture SI</p></div>
+</footer>
 
 </body>
 </html>
