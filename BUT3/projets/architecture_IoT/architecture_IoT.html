@@ -59,21 +59,44 @@
         .archi-list i { color: var(--accent); margin-top: 5px; }
 
         /* On réduit le padding pour que l'image occupe tout l'espace de la carte */
+        /* Modification du conteneur pour inclure la légende */
         .img-archi-container { 
             background: var(--card-bg); 
             border: 1px solid var(--border); 
             border-radius: 24px; 
-            padding: 10px; /* Moins de vide autour pour que l'image soit plus grosse */
+            padding: 20px; 
             display: flex; 
+            flex-direction: column; /* Force la légende sous l'image */
             align-items: center; 
             justify-content: center;
+            gap: 15px; /* Espace entre l'image et la légende */
         }
 
         .img-archi-container img { 
             width: 100%; 
             height: auto; 
             object-fit: contain; 
-            border-radius: 15px;
+            border-radius: 12px;
+        }
+
+        /* Style spécifique pour la légende de l'architecture */
+        .archi-legend {
+            width: 100%;
+            text-align: left; /* Aligné à gauche pour plus de professionnalisme */
+            padding: 10px 5px;
+            border-top: 1px solid var(--border); /* Petite ligne de séparation discrète */
+        }
+
+        .archi-legend h4 {
+            color: var(--accent);
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .archi-legend p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.4;
         }
 
         /* --- COMPETENCES --- */
@@ -207,9 +230,13 @@
                     <li><i class="fas fa-desktop"></i> Visualiser les données localement sur écran OLED et à distance sur ThingSpeak</li>
                 </ul>
             </div>
-            <div class="img-archi-container">
+            <figure class="img-archi-container">
                 <img src="images/archi_IoT.png" alt="Schéma de l'architecture">
-            </div>
+                <figcaption class="archi-legend">
+                    <h4>Architecture du Système Hybride</h4>
+                    <p>Vue d'ensemble de la chaîne de transmission : du capteur physique jusqu'à la remontée Cloud via WiFi/4G.</p>
+                </figcaption>
+            </figure>
         </section>
 
         <section class="skills-section">
