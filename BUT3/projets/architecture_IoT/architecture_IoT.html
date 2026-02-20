@@ -35,37 +35,45 @@
         nav a:hover { color: var(--accent); }
         /* --- BREADCRUMB (FIL D'ARIANE) --- */
         .breadcrumb {
-            display: flex; align-items: center; gap: 10px; margin: 2rem 0 1rem; font-size: 0.85rem; color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 2rem 0 1rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
         }
-        .breadcrumb a { color: var(--text-muted); text-decoration: none; transition: 0.3s; }
+        .breadcrumb a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: 0.3s;
+        }
         .breadcrumb a:hover { color: var(--accent); }
         .breadcrumb i { font-size: 0.7rem; opacity: 0.5; }
         .breadcrumb span { color: var(--accent); font-weight: 600; }
         main { max-width: 1200px; margin: 0 auto; padding: 40px 8% 80px; }
-
         /* --- PRESENTATION STRUCTURE --- */
-        .intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; margin-bottom: 80px; }
+        .intro-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px; align-items: center; margin-bottom: 80px; }
         .intro-text h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 20px; line-height: 1.1; }
         .archi-list { list-style: none; margin-top: 20px; }
         .archi-list li { margin-bottom: 12px; display: flex; gap: 15px; background: var(--card-bg); padding: 15px; border-radius: 10px; border: 1px solid var(--border); }
         .archi-list i { color: var(--accent); margin-top: 5px; }
 
-        /* Conteneur Spécifique Architecture (PLUS GROS) */
+        /* On réduit le padding pour que l'image occupe tout l'espace de la carte */
         .img-archi-container { 
             background: var(--card-bg); 
             border: 1px solid var(--border); 
-            border-radius: 20px; 
-            padding: 20px;
+            border-radius: 24px; 
+            padding: 10px; /* Moins de vide autour pour que l'image soit plus grosse */
             display: flex; 
             align-items: center; 
-            justify-content: center; 
-            overflow: hidden;
+            justify-content: center;
         }
+
         .img-archi-container img { 
             width: 100%; 
             height: auto; 
             object-fit: contain; 
-            border-radius: 12px; 
+            border-radius: 15px;
         }
 
         /* --- COMPETENCES --- */
@@ -118,7 +126,7 @@
         .btn-group { display: flex; gap: 20px; justify-content: center; margin-top: 30px; }
         .btn-dl { background: var(--text-main); color: var(--bg); padding: 12px 30px; border-radius: 8px; text-decoration: none; font-weight: 700; display: flex; align-items: center; gap: 10px; }
 
-        /* --- FOOTER --- */
+        /* --- FOOTER UNIFIÉ --- */
         footer { padding: 4rem 8% 2rem; background: var(--bg-card); border-top: 1px solid var(--border); margin-top: 5rem; }
         .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 4rem; margin-bottom: 3rem; text-align: left; }
         .footer-logo { font-weight: 800; margin-bottom: 1rem; font-size: 1.2rem; }
@@ -131,7 +139,6 @@
         .social-btn { width: 40px; height: 40px; border-radius: 8px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--text-muted); text-decoration: none; transition: 0.3s; }
         .social-btn:hover { border-color: var(--accent); color: var(--accent); background: rgba(34, 211, 238, 0.05); }
         .footer-bottom { padding-top: 2rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-muted); }
-
         @media (max-width: 850px) { 
             .intro-grid, .step-row { grid-template-columns: 1fr; gap: 30px; } 
             .step-row:nth-child(even) { direction: ltr; } 
