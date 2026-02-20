@@ -70,6 +70,7 @@
         /* --- PROBLEMES --- */
         .problem-box { background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); padding: 30px; border-radius: 15px; margin-bottom: 80px; }
         .problem-box h2 { color: #f87171; margin-bottom: 15px; font-size: 1.4rem; display: flex; align-items: center; gap: 10px; }
+        .solution-tag { background: rgba(34, 211, 238, 0.1); color: var(--accent); padding: 4px 12px; border-radius: 6px; font-size: 0.8rem; font-weight: 700; margin-top: 15px; display: inline-block; }
         /* --- ETAPES REALISATION (6 ÉTAPES) --- */
         .realisation-section h2 { text-align: center; margin-bottom: 40px; font-size: 2rem; }
         .step-row { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; margin-bottom: 100px; }
@@ -166,12 +167,16 @@
             </div>
         </section>
         <section class="problem-box">
-            <h2><i class="fas fa-exclamation-triangle"></i> Problème rencontré</h2>
-            <p style="color: var(--text-muted);">
-                Lors des tests longue portée, nous avons rencontré des pertes de paquets significatives en milieu urbain dense. 
-                Après analyse à l'oscilloscope, nous avons identifié des interférences majeures sur la bande 868MHz. 
-                La solution a été d'ajuster le <b>Spreading Factor (SF)</b> du protocole LoRa pour augmenter la résilience du signal au détriment du débit.
+            <h2><i class="fas fa-bug"></i> Problème rencontré: Dysfonctionnement Lecture "NAN"</h2>
+            <p style="color: var(--text-main); margin-bottom: 15px;">
+                Lors de l’utilisation d’un code de base avec le capteur <strong>KY-013</strong> sur une carte Heltec, la console affichait <strong>« NAN » (Not A Number)</strong>. Ce défaut de traitement des données rendait les mesures inexploitables.
             </p>
+            <div style="color: var(--text-muted); font-size: 0.95rem;">
+                <p><strong>Actions correctives :</strong></p>
+                <p>✔ Utilisation de la valeur absolue de la résistance avant le calcul du logarithme.</p>
+                <p>✔ Ajustement de la formule de conversion pour une cohérence avec les mesures réelles.</p>
+            </div>
+            <span class="solution-tag"><i class="fas fa-info-circle"></i> Données fiabilisées et capteur pleinement exploité.</span>
         </section>
         <section class="realisation-section">
             <h2>Réalisations Techniques</h2>
