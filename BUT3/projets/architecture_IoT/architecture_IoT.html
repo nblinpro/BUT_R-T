@@ -35,23 +35,62 @@
         nav a:hover { color: var(--accent); }
         /* --- BREADCRUMB (FIL D'ARIANE) --- */
         .breadcrumb {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin: 2rem 0 1rem;
-            font-size: 0.85rem;
-            color: var(--text-muted);
+            display: flex; align-items: center; gap: 10px; margin: 2rem 0 1rem; font-size: 0.85rem; color: var(--text-muted);
         }
-        .breadcrumb a {
-            color: var(--text-muted);
-            text-decoration: none;
-            transition: 0.3s;
-        }
+        .breadcrumb a { color: var(--text-muted); text-decoration: none; transition: 0.3s; }
         .breadcrumb a:hover { color: var(--accent); }
         .breadcrumb i { font-size: 0.7rem; opacity: 0.5; }
         .breadcrumb span { color: var(--accent); font-weight: 600; }
         main { max-width: 1200px; margin: 0 auto; padding: 40px 8% 80px; }
-        /* --- STYLE GALERIE ETAPES --- */
+
+        /* --- PRESENTATION STRUCTURE --- */
+        .intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; margin-bottom: 80px; }
+        .intro-text h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 20px; line-height: 1.1; }
+        .archi-list { list-style: none; margin-top: 20px; }
+        .archi-list li { margin-bottom: 12px; display: flex; gap: 15px; background: var(--card-bg); padding: 15px; border-radius: 10px; border: 1px solid var(--border); }
+        .archi-list i { color: var(--accent); margin-top: 5px; }
+
+        /* Conteneur Spécifique Architecture (PLUS GROS) */
+        .img-archi-container { 
+            background: var(--card-bg); 
+            border: 1px solid var(--border); 
+            border-radius: 20px; 
+            padding: 20px;
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            overflow: hidden;
+        }
+        .img-archi-container img { 
+            width: 100%; 
+            height: auto; 
+            object-fit: contain; 
+            border-radius: 12px; 
+        }
+
+        /* --- COMPETENCES --- */
+        .skills-section { margin-bottom: 80px; }
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .skill-card { background: var(--card-bg); border: 1px solid var(--border); padding: 30px; border-radius: 15px; }
+        .skill-card h3 { color: var(--accent); font-size: 1.1rem; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
+        .skill-card ul { list-style: none; }
+        .skill-card li { margin-bottom: 10px; font-size: 0.95rem; color: var(--text-muted); display: flex; gap: 10px; }
+        .skill-card li::before { content: "•"; color: var(--accent); font-weight: bold; }
+
+        /* --- PROBLEMES --- */
+        .problem-box { background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); padding: 30px; border-radius: 15px; margin-bottom: 80px; }
+        .problem-box h2 { color: #f87171; margin-bottom: 15px; font-size: 1.4rem; display: flex; align-items: center; gap: 10px; }
+        .solution-tag { background: rgba(34, 211, 238, 0.1); color: var(--accent); padding: 4px 12px; border-radius: 6px; font-size: 0.8rem; font-weight: 700; margin-top: 15px; display: inline-block; }
+
+        /* --- ETAPES REALISATION --- */
+        .realisation-section h2 { text-align: center; margin-bottom: 40px; font-size: 2rem; }
+        .step-row { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; margin-bottom: 100px; }
+        .step-row:nth-child(even) { direction: rtl; }
+        .step-row:nth-child(even) .step-content { direction: ltr; }
+        .step-content h3 { font-size: 1.5rem; margin-bottom: 15px; color: var(--accent); }
+        .step-num { font-family: 'JetBrains Mono'; font-size: 4rem; font-weight: 800; opacity: 0.1; line-height: 1; }
+
+        /* Galerie de composants (Étape 1) */
         .component-gallery {
             display: flex;
             gap: 15px;
@@ -69,57 +108,17 @@
             transition: 0.3s;
         }
         .component-gallery img:hover { border-color: var(--accent); transform: scale(1.02); }
-        /* --- PRESENTATION STRUCTURE --- */
-        .intro-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 40px; align-items: center; margin-bottom: 80px; }
-        .intro-text h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 20px; line-height: 1.1; }
-        .archi-list { list-style: none; margin-top: 20px; }
-        .archi-list li { margin-bottom: 12px; display: flex; gap: 15px; background: var(--card-bg); padding: 15px; border-radius: 10px; border: 1px solid var(--border); }
-        .archi-list i { color: var(--accent); margin-top: 5px; }
-        /* Conteneur de l'image (l'architecture) */
-        .img-placeholder { 
-            background: var(--card-bg); 
-            border: 1px solid var(--border); 
-            border-radius: 20px; 
-            padding: 20px; /* Ajoute un peu d'espace autour de l'image */
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            overflow: hidden;
-            min-height: 400px; /* Hauteur minimale au lieu d'une hauteur fixe */
-        }
-        /* Force l'image à tenir dans le cadre sans déborder ni se déformer */
-        .img-placeholder img { 
-            max-width: 100%; 
-            height: auto; 
-            object-fit: contain; /* Garde les proportions entières de l'image */
-            border-radius: 12px; /* Optionnel : arrondit l'image elle-même */
-        }
-        /* --- COMPETENCES --- */
-        .skills-section { margin-bottom: 80px; }
-        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        .skill-card { background: var(--card-bg); border: 1px solid var(--border); padding: 30px; border-radius: 15px; }
-        .skill-card h3 { color: var(--accent); font-size: 1.1rem; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
-        .skill-card ul { list-style: none; }
-        .skill-card li { margin-bottom: 10px; font-size: 0.95rem; color: var(--text-muted); display: flex; gap: 10px; }
-        .skill-card li::before { content: "•"; color: var(--accent); font-weight: bold; }
-        /* --- PROBLEMES --- */
-        .problem-box { background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); padding: 30px; border-radius: 15px; margin-bottom: 80px; }
-        .problem-box h2 { color: #f87171; margin-bottom: 15px; font-size: 1.4rem; display: flex; align-items: center; gap: 10px; }
-        .solution-tag { background: rgba(34, 211, 238, 0.1); color: var(--accent); padding: 4px 12px; border-radius: 6px; font-size: 0.8rem; font-weight: 700; margin-top: 15px; display: inline-block; }
-        /* --- ETAPES REALISATION (6 ÉTAPES) --- */
-        .realisation-section h2 { text-align: center; margin-bottom: 40px; font-size: 2rem; }
-        .step-row { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; margin-bottom: 100px; }
-        .step-row:nth-child(even) { direction: rtl; }
-        .step-row:nth-child(even) .step-text { direction: ltr; }
-        .step-content h3 { font-size: 1.5rem; margin-bottom: 15px; color: var(--accent); }
-        .step-num { font-family: 'JetBrains Mono'; font-size: 4rem; font-weight: 800; opacity: 0.1; line-height: 1; }
-        .step-img { background: var(--card-bg); border: 1px solid var(--border); border-radius: 15px; height: 300px; overflow: hidden; }
+
+        /* Image Unique pour les autres étapes */
+        .step-img { background: var(--card-bg); border: 1px solid var(--border); border-radius: 15px; height: 300px; overflow: hidden; display: flex; align-items: center; justify-content: center;}
         .step-img img { width: 100%; height: 100%; object-fit: cover; }
+
         /* --- LIVRABLES --- */
         .livrables-zone { background: var(--card-bg); padding: 40px; border-radius: 20px; text-align: center; border: 1px solid var(--border); }
         .btn-group { display: flex; gap: 20px; justify-content: center; margin-top: 30px; }
         .btn-dl { background: var(--text-main); color: var(--bg); padding: 12px 30px; border-radius: 8px; text-decoration: none; font-weight: 700; display: flex; align-items: center; gap: 10px; }
-        /* --- FOOTER UNIFIÉ --- */
+
+        /* --- FOOTER --- */
         footer { padding: 4rem 8% 2rem; background: var(--bg-card); border-top: 1px solid var(--border); margin-top: 5rem; }
         .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 4rem; margin-bottom: 3rem; text-align: left; }
         .footer-logo { font-weight: 800; margin-bottom: 1rem; font-size: 1.2rem; }
@@ -132,30 +131,37 @@
         .social-btn { width: 40px; height: 40px; border-radius: 8px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--text-muted); text-decoration: none; transition: 0.3s; }
         .social-btn:hover { border-color: var(--accent); color: var(--accent); background: rgba(34, 211, 238, 0.05); }
         .footer-bottom { padding-top: 2rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-muted); }
-        @media (max-width: 768px) { .hero-project h1 { font-size: 2rem; } .breadcrumb { margin: 20px 5% 0; } }
+
+        @media (max-width: 850px) { 
+            .intro-grid, .step-row { grid-template-columns: 1fr; gap: 30px; } 
+            .step-row:nth-child(even) { direction: ltr; } 
+            .component-gallery { flex-direction: column; } 
+            .component-gallery img { width: 100%; } 
+        }
     </style>
 </head>
 <body>
     <div class="ambient-bg"></div>
     <header>
-    <div class="logo">Nicolas<span>.SI</span></div>
-    <nav>
-        <ul>
-            <li><a href="https://nblinpro.github.io/portfolio/index.html">Accueil</a></li>
-            <li><a href="https://nblinpro.github.io/portfolio/pages/parcours.html">Parcours</a></li>
-            <li><a href="https://nblinpro.github.io/portfolio/pages/projets.html">Projets</a></li>
-            <li><a href="https://nblinpro.github.io/portfolio/pages/contact.html">Contact</a></li>
-        </ul>
-    </nav>
-</header>
+        <div class="logo">Nicolas<span>.SI</span></div>
+        <nav>
+            <ul>
+                <li><a href="https://nblinpro.github.io/portfolio/index.html">Accueil</a></li>
+                <li><a href="https://nblinpro.github.io/portfolio/pages/parcours.html">Parcours</a></li>
+                <li><a href="https://nblinpro.github.io/portfolio/pages/projets.html">Projets</a></li>
+                <li><a href="https://nblinpro.github.io/portfolio/pages/contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
     <main>
-    <nav class="breadcrumb">
-        <a href="https://nblinpro.github.io/portfolio/pages/projets.html">Projets</a> 
-        <i class="fas fa-chevron-right" style="font-size: 0.6rem;"></i>
-        <a href="../projets.html">Projets IoT But 3</a> 
-        <i class="fas fa-chevron-right" style="font-size: 0.6rem;"></i>
-        <span style="color: var(--accent);">Architecture Réseaux IoT</span>
-    </nav>
+        <nav class="breadcrumb">
+            <a href="https://nblinpro.github.io/portfolio/pages/projets.html">Projets</a> 
+            <i class="fas fa-chevron-right" style="font-size: 0.6rem;"></i>
+            <a href="../projets.html">Projets IoT But 3</a> 
+            <i class="fas fa-chevron-right" style="font-size: 0.6rem;"></i>
+            <span style="color: var(--accent);">Architecture Réseaux IoT</span>
+        </nav>
+
         <section class="intro-grid">
             <div class="intro-text">
                 <h1>Qualification d'Architectures <br><span style="color: var(--accent)">Réseaux Hybrides IoT</span></h1>
@@ -167,10 +173,11 @@
                     <li><i class="fas fa-desktop"></i> Visualiser les données localement sur écran OLED et à distance sur ThingSpeak</li>
                 </ul>
             </div>
-            <div class="img-placeholder">
+            <div class="img-archi-container">
                 <img src="images/archi_IoT.png" alt="Schéma de l'architecture">
             </div>
         </section>
+
         <section class="skills-section">
             <h2 style="margin-bottom: 30px;">Compétences mobilisées</h2>
             <div class="skills-grid">
@@ -201,6 +208,7 @@
                 </div>
             </div>
         </section>
+
         <section class="problem-box">
             <h2><i class="fas fa-bug"></i> Problème rencontré: Dysfonctionnement Lecture "NAN"</h2>
             <p style="color: var(--text-main); margin-bottom: 15px;">
@@ -213,8 +221,10 @@
             </div>
             <span class="solution-tag"><i class="fas fa-info-circle"></i> Données fiabilisées et capteur pleinement exploité.</span>
         </section>
+
         <section class="realisation-section">
             <h2>Réalisations Techniques</h2>
+            
             <div class="step-row">
                 <div class="step-content">
                     <span class="step-num">01</span>
@@ -227,6 +237,7 @@
                     <img src="images/ky_012.png" alt="Buzzer KY-012">
                 </div>
             </div>
+
             <div class="step-row">
                 <div class="step-content">
                     <span class="step-num">02</span>
@@ -268,40 +279,30 @@
                 <div class="step-img"><img src="etape6.jpg" alt="Etape 6"></div>
             </div>
         </section>
+
         <section class="livrables-zone">
             <h2>Livrables & Documents</h2>
-            <p style="color: var(--text-muted);">Retrouvez l'intégralité de la documentation technique et des résultats de mesure ci-dessous.</p>
             <div class="btn-group">
                 <a href="livrable_IoT.pdf" class="btn-dl"><i class="fas fa-file-pdf"></i> Rapport de Projet</a>
                 <a href="diaporama_IoT.pdf" class="btn-dl"><i class="fas fa-file-powerpoint"></i> Diaporama Final</a>
             </div>
         </section>
     </main>
-<footer>
-    <div class="footer-top">
-        <div class="footer-col">
-            <div class="footer-logo">Nicolas<span>.SI</span></div>
-            <p style="font-size: 0.9rem; color: var(--text-muted);">Architecte des SI spécialisé dans la conception d'infrastructures hautement disponibles.</p>
-        </div>
-        <div class="footer-col">
-            <h4>Navigation</h4>
-            <ul>
-                <li><a href="https://nblinpro.github.io/portfolio/index.html">Accueil</a></li>
-                <li><a href="https://nblinpro.github.io/portfolio/pages/parcours.html">Parcours</a></li>
-                <li><a href="https://nblinpro.github.io/portfolio/pages/projets.html">Projets</a></li>
-                <li><a href="https://nblinpro.github.io/portfolio/pages/contact.html">Contact</a></li>
-            </ul>
-        </div>
-        <div class="footer-col">
-            <h4>Contact</h4>
-            <div class="social-links">
-                <a href="https://www.linkedin.com/in/nicolas-blin-6a5135218/" class="social-btn"><i class="fab fa-linkedin-in"></i></a>
-                <a href="mailto:nicolas.blin.pro1@gmail.com" class="social-btn"><i class="far fa-envelope"></i></a>
+
+    <footer>
+        <div class="footer-top">
+            <div class="footer-col">
+                <div class="footer-logo">Nicolas<span>.SI</span></div>
+                <p>© 2026 Nicolas Blin | Expert Architecture SI</p>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/nicolas-blin-6a5135218/" class="social-btn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="mailto:nicolas.blin.pro1@gmail.com" class="social-btn"><i class="far fa-envelope"></i></a>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="footer-bottom"><p>© 2026 Nicolas Blin | Expert Architecture SI</p></div>
-</footer>
-
+    </footer>
 </body>
 </html>
