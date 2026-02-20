@@ -62,32 +62,47 @@
         .section-title i { color: var(--accent); }
         /* --- STEP GRID --- */
         .step-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
-        .step-card {
+/* Conteneur de la carte */
+.step-card {
     background: var(--card-bg);
     border: 1px solid var(--border);
-    padding: 2rem;
+    padding: 2.5rem;
     border-radius: 16px;
-    position: relative; /* Garde ça pour que le chiffre reste dans la carte */
+    position: relative; /* Indispensable pour le placement du chiffre */
     transition: 0.3s;
-    overflow: hidden;   /* Ajoute ça pour que le chiffre ne dépasse pas de la carte */
+    overflow: hidden;   /* Empêche le chiffre de déborder */
+    display: flex;
+    flex-direction: column;
 }
+/* Le chiffre en arrière-plan */
 .step-number {
-    font-family: 'JetBrains Mono';
+    font-family: 'JetBrains Mono', monospace;
     color: var(--accent);
-    font-size: 4rem;    /* Tu peux l'agrandir un peu pour le style */
+    font-size: 5rem;    /* Plus grand pour un effet design */
     font-weight: 800;
-    opacity: 0.1;       /* Baisse l'opacité (0.1 au lieu de 0.2) pour qu'il soit très discret */
+    opacity: 0.05;      /* Très faible opacité pour ne pas gêner la lecture */
     position: absolute;
-    top: 10px;
-    right: 15px;
-    z-index: 0;         /* Force le chiffre au niveau le plus bas */
-    pointer-events: none; /* Permet de cliquer "à travers" le chiffre */
+    top: -10px;
+    right: 10px;
+    z-index: 0;         /* Niveau le plus bas */
+    pointer-events: none;
 }
-/* Force les textes à passer DEVANT le chiffre */
+/* Le contenu qui doit être DEVANT */
 .step-card h3, 
 .step-card ul {
     position: relative; 
-    z-index: 1;         /* Passe au niveau supérieur */
+    z-index: 1;         /* Passe au-dessus du chiffre */
+}
+.step-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+    color: var(--accent);
+    line-height: 1.2;
+}
+.step-card ul li {
+    margin-bottom: 12px;
+    font-size: 0.95rem;
+    color: var(--text-muted);
 }
         /* --- COMPETENCES --- */
         .skills-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
@@ -147,64 +162,7 @@
             <h1>Qualification d'Architectures <br><span style="color: var(--accent)">Réseaux Hybrides IoT</span></h1>
             <p>Conception et analyse comparative de solutions de communication sans fil (Bluetooth, BLE, LoRa) pour environnements connectés via microcontrôleurs ESP32.</p>
         </section>
-        <h2 class="section-title"><i class="fas fa-microchip"></i> Mes Réalisations Techniques</h2>
-        <div class="step-grid">
-            <div class="step-card">
-                <span class="step-number">01</span>
-                <h3>Étude des Composants</h3>
-                <ul>
-                    <li>Analyse du capteur de température KY-013 (Thermistance NTC)</li>
-                    <li>Maîtrise du microcontrôleur ESP32 (Wi-Fi, BT, LoRa)</li>
-                    <li>Intégration d'écrans OLED pour l'affichage local</li>
-                </ul>
-            </div>
-            <div class="step-card">
-                <span class="step-number">02</span>
-                <h3>Montage & Logique</h3>
-                <ul>
-                    <li>Interfaçage complet capteurs/actionneurs sur ESP32</li>
-                    <li>Programmation de la logique conditionnelle d'alerte ( KY-012 Buzzer)</li>
-                    <li>Développement du système d'affichage en temps réel</li>
-                </ul>
-            </div>
-            <div class="step-card">
-                <span class="step-number">03</span>
-                <h3>Communications Hybrides</h3>
-                <ul>
-                    <li>Programmation des protocoles Bluetooth Classic et BLE</li>
-                    <li>Implémentation de liaisons longue portée LoRa</li>
-                    <li>Relais de données vers la plateforme Cloud ThingSpeak</li>
-                </ul>
-            </div>
-            <div class="step-card">
-                <span class="step-number">04</span>
-                <h3>Tests de Performance</h3>
-                <ul>
-                    <li>Mesures RSSI en environnement urbain et rural</li>
-                    <li>Analyse de la stabilité du signal selon la distance</li>
-                    <li>Benchmarking des débits et latences</li>
-                </ul>
-            </div>
-            <div class="step-card">
-                <span class="step-number">05</span>
-                <h3>Analyse Énergétique</h3>
-                <ul>
-                    <li>Mesures à l'oscilloscope sur résistance calibrée</li>
-                    <li>Impact du Spreading Factor (SF) sur la consommation LoRa</li>
-                    <li>Comparatif de l'empreinte énergétique par protocole</li>
-                </ul>
-            </div>
-            <div class="step-card">
-                <span class="step-number">06</span>
-                <h3>Évaluation de l'Autonomie</h3>
-                <ul>
-                    <li>Calculs théoriques vs mesures réelles de longévité</li>
-                    <li>Optimisation des cycles de mise en veille (Deep Sleep)</li>
-                    <li>Analyse des compromis Portée / Énergie</li>
-                </ul>
-            </div>
-        </div>
-      <h2 class="section-title"><i class="fas fa-tasks"></i> Compétences Mobilisées</h2>     
+        <h2 class="section-title"><i class="fas fa-tasks"></i> Compétences Mobilisées</h2>     
         <div class="skills-container">
             <div class="skill-box">
                 <h4>IoT & Embarqué</h4>
@@ -231,6 +189,66 @@
                 </ul>
             </div>
         </div>
+        <h2 class="section-title"><i class="fas fa-microchip"></i> Mes Réalisations Techniques</h2>
+
+<div class="step-grid">
+    <div class="step-card">
+        <span class="step-number">01</span>
+        <h3>Étude des Composants</h3>
+        <ul>
+            <li>Analyse du capteur de température KY-013 (Thermistance NTC) tiré au sort, plage -55°C à +125°C</li>
+            <li>Compréhension du buzzer KY-012 pour signal sonore immédiat</li>
+            <li>Spécifications de l'ESP32 (Bluetooth, BLE, LoRa, Wi-Fi)</li>
+            <li>Intégration écran OLED pour affichage local des alertes</li>
+        </ul>
+    </div>
+    <div class="step-card">
+        <span class="step-number">02</span>
+        <h3>Montage & Logique</h3>
+        <ul>
+            <li>Intégration capteur KY-013 et buzzer KY-012 sur ESP32</li>
+            <li>Mise en place de l'affichage temps réel sur OLED</li>
+            <li>Programmation de la logique conditionnelle d'alerte</li>
+            <li>Montage réalisé avec 2 capteurs et 2 ESP32 pour le projet</li>
+        </ul>
+    </div>
+    <div class="step-card">
+        <span class="step-number">03</span>
+        <h3>Communications Hybrides</h3>
+        <ul>
+            <li>Programmation des modules en Bluetooth, BLE et LoRa</li>
+            <li>Échanges entre ESP émetteur (capteurs) et ESP récepteur (relais)</li>
+            <li>Implémentation de ThingSpeak pour le suivi à distance</li>
+        </ul>
+    </div>
+    <div class="step-card">
+        <span class="step-number">04</span>
+        <h3>Tests de Performance</h3>
+        <ul>
+            <li>Mesures RSSI selon la distance (champs vs ville)</li>
+            <li>Analyse comparative : portée, stabilité et énergie</li>
+            <li>Tests en environnements intérieur, urbain et rural</li>
+        </ul>
+    </div>
+    <div class="step-card">
+        <span class="step-number">05</span>
+        <h3>Analyse Énergétique</h3>
+        <ul>
+            <li>Protocole via oscilloscope et résistance calibrée</li>
+            <li>Comparaison Bluetooth vs BLE vs LoRa vs Capteurs</li>
+            <li>Impact des Spreading Factors (SF) sur la consommation LoRa</li>
+        </ul>
+    </div>
+    <div class="step-card">
+        <span class="step-number">06</span>
+        <h3>Évaluation de l'Autonomie</h3>
+        <ul>
+            <li>Calcul de l'autonomie des ESP32 par mode utilisé</li>
+            <li>Mise en évidence de l'avantage du BLE pour la consommation</li>
+            <li>Analyse des compromis portée / autonomie / énergie</li>
+        </ul>
+    </div>
+</div>
         <h2 class="section-title"><i class="fas fa-file-pdf"></i> Livrables du Projet</h2>
         <div class="download-zone">
             <a href="#" class="btn-download"><i class="fas fa-file-pdf"></i> Rapport Technique</a>
