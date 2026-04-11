@@ -1,1 +1,283 @@
-Coucou
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Missions DGFIP — 3ème Année | Nicolas Blin</title>
+    <meta name="description" content="Missions en alternance à la DGFIP (3ème année BUT R&T) : densification réseau, migration ToIP, gestion incidents réseau Niveau 2.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-body: #020617;
+            --bg-card: #0b1120;
+            --bg-card-hover: #1e293b;
+            --accent: #22d3ee;
+            --accent-glow: rgba(34, 211, 238, 0.15);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: #1e293b;
+            --radius: 12px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background-color: var(--bg-body); color: var(--text-main); line-height: 1.6; overflow-x: hidden; }
+
+        /* --- HEADER --- */
+        header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1.5rem 8%; border-bottom: 1px solid var(--border);
+            position: sticky; top: 0; background: rgba(2, 6, 23, 0.8); backdrop-filter: blur(10px); z-index: 100;
+        }
+        .logo { font-weight: 800; font-size: 1.4rem; letter-spacing: -1px; text-decoration: none; color: var(--text-main); }
+        .logo span { color: var(--accent); }
+        nav ul { display: flex; list-style: none; gap: 2rem; align-items: center; }
+        nav a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; transition: 0.3s; }
+        nav a:hover { color: var(--accent); }
+
+        /* --- BREADCRUMB --- */
+        .breadcrumb { display: flex; align-items: center; gap: 10px; padding: 2rem 8% 1rem; font-size: 0.85rem; color: var(--text-muted); }
+        .breadcrumb a { color: var(--text-muted); text-decoration: none; transition: 0.3s; }
+        .breadcrumb a:hover { color: var(--accent); }
+        .breadcrumb i { font-size: 0.7rem; opacity: 0.5; }
+
+        /* --- HERO --- */
+        .hero { padding: 1rem 8% 2rem; text-align: center; }
+        .hero-tag {
+            background: rgba(34, 211, 238, 0.1); color: var(--accent);
+            padding: 6px 15px; border-radius: 20px; font-size: 0.75rem; font-weight: 700;
+            letter-spacing: 1px; border: 1px solid var(--accent-glow); margin-bottom: 1rem; display: inline-block;
+        }
+        h1 { font-size: 2.8rem; margin-bottom: 1rem; }
+        .hero p { color: var(--text-muted); max-width: 600px; margin: 0 auto; }
+
+        /* --- CONTEXT BANNER --- */
+        .context-banner {
+            margin: 0 8% 2rem;
+            background: rgba(34, 211, 238, 0.04);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--accent);
+            border-radius: 0 var(--radius) var(--radius) 0;
+            padding: 1rem 1.5rem;
+            display: flex; align-items: center; gap: 1rem;
+            font-size: 0.88rem; color: var(--text-muted);
+        }
+        .context-banner i { color: var(--accent); flex-shrink: 0; }
+
+        /* --- FILTRES --- */
+        .filter-container { text-align: center; margin-bottom: 3rem; }
+        .filter-btn {
+            background: var(--bg-card); color: var(--text-muted); padding: 8px 20px;
+            border-radius: 8px; margin: 0 5px; border: 1px solid var(--border);
+            cursor: pointer; transition: 0.3s; font-size: 0.8rem; font-weight: 600;
+            text-transform: uppercase;
+        }
+        .filter-btn.active {
+            background: var(--accent); color: #020617; border-color: var(--accent);
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+
+        /* --- GRILLE & CARDS --- */
+        main { padding: 0 8% 5rem; max-width: 1400px; margin: 0 auto; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1.5rem; }
+
+        .card {
+            background: var(--bg-card); border: 1px solid var(--border);
+            padding: 2.5rem; border-radius: var(--radius); transition: 0.3s;
+            display: flex; flex-direction: column; opacity: 1;
+        }
+        .card.hidden { display: none; opacity: 0; }
+        .card:hover { border-color: var(--accent); transform: translateY(-5px); background: var(--bg-card-hover); }
+
+        .company-tag { color: var(--accent); font-size: 0.7rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1rem; display: block; }
+        .card i.card-icon { font-size: 2.5rem; color: var(--accent); margin-bottom: 1.5rem; }
+        .card h3 { font-size: 1.4rem; margin-bottom: 1rem; color: var(--text-main); }
+        .card p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem; flex-grow: 1; }
+
+        .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 1.5rem; }
+        .tag-small {
+            background: rgba(34, 211, 238, 0.05); color: var(--accent);
+            padding: 4px 10px; border-radius: 6px; font-size: 0.7rem; font-weight: 600; border: 1px solid var(--border);
+        }
+
+        .btn-card {
+            background: transparent; border: 1px solid var(--border); color: var(--text-main);
+            text-align: center; padding: 12px; border-radius: 8px; text-decoration: none;
+            font-weight: 600; font-size: 0.85rem; transition: 0.3s;
+        }
+        .btn-card:hover { background: var(--accent); color: #020617; border-color: var(--accent); }
+        .btn-card.disabled { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
+
+        /* --- FOOTER --- */
+        footer { padding: 4rem 8% 2rem; background: var(--bg-card); border-top: 1px solid var(--border); margin-top: 5rem; }
+        .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 4rem; margin-bottom: 3rem; }
+        .footer-logo { font-weight: 800; font-size: 1.2rem; margin-bottom: 1rem; }
+        .footer-logo span { color: var(--accent); }
+        .footer-col h4 { margin-bottom: 1.5rem; font-size: 1rem; color: var(--text-main); }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 10px; }
+        .footer-col a { color: var(--text-muted); text-decoration: none; transition: 0.3s; font-size: 0.9rem; }
+        .footer-col a:hover { color: var(--accent); }
+        .social-links { display: flex; gap: 1rem; }
+        .social-btn { width: 40px; height: 40px; border-radius: 8px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--text-muted); text-decoration: none; transition: 0.3s; }
+        .social-btn:hover { border-color: var(--accent); color: var(--accent); background: rgba(34, 211, 238, 0.05); }
+        .footer-bottom { padding-top: 2rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-muted); }
+
+        /* HAMBURGER MENU */
+        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; z-index: 1001; }
+        .hamburger span { display: block; width: 22px; height: 2px; background: var(--text-main); border-radius: 2px; transition: transform 0.3s, opacity 0.3s; }
+        .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+        .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        @media (max-width: 768px) {
+            header { padding: 1rem 5%; }
+            nav { display: none; }
+            .hamburger { display: flex; }
+            nav.open {
+                display: flex; position: fixed; inset: 0;
+                background: rgba(2, 6, 23, 0.98); backdrop-filter: blur(20px);
+                z-index: 1000; flex-direction: column; align-items: center; justify-content: center;
+            }
+            nav.open ul { flex-direction: column; align-items: center; gap: 2.5rem; }
+            nav.open a { font-size: 1.3rem; }
+            .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+            .grid { grid-template-columns: 1fr; }
+            .context-banner { margin: 0 5% 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="https://nblinpro.github.io/portfolio/index.html" class="logo">Nicolas<span>.SI</span></a>
+    <button class="hamburger" aria-label="Menu navigation" onclick="this.classList.toggle('active'); document.querySelector('header nav').classList.toggle('open')">
+        <span></span><span></span><span></span>
+    </button>
+    <nav>
+        <ul>
+            <li><a href="https://nblinpro.github.io/portfolio/index.html">Accueil</a></li>
+            <li><a href="https://nblinpro.github.io/portfolio/pages/parcours.html">Parcours</a></li>
+            <li><a href="https://nblinpro.github.io/portfolio/pages/projets.html">Projets</a></li>
+            <li><a href="https://nblinpro.github.io/portfolio/pages/contact.html">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+
+<nav class="breadcrumb">
+    <a href="https://nblinpro.github.io/portfolio/pages/projets.html">Projets</a>
+    <i class="fas fa-chevron-right"></i>
+    <span style="color: var(--accent);">DGFIP — BUT 3</span>
+</nav>
+
+<main>
+    <section class="hero">
+        <span class="hero-tag"><i class="fa-solid fa-briefcase"></i> ALTERNANCE · 2024–2025</span>
+        <h1>Missions <span style="color: var(--accent);">DGFIP</span></h1>
+        <p>Densification réseau et migration vers la téléphonie sur IP au sein de la Direction Régionale des Finances Publiques.</p>
+    </section>
+
+    <div class="context-banner">
+        <i class="fas fa-building-columns fa-lg"></i>
+        <span><strong>Direction Générale des Finances Publiques (DGFIP)</strong> — Poste : Assistant de Proximité · DIRCOFI · 3ème année BUT R&T · Alternance</span>
+    </div>
+
+    <div class="filter-container">
+        <button class="filter-btn active" onclick="filterProjects('all', this)">Tous</button>
+        <button class="filter-btn" onclick="filterProjects('reseau', this)">Réseau</button>
+        <button class="filter-btn" onclick="filterProjects('toip', this)">ToIP</button>
+        <button class="filter-btn" onclick="filterProjects('support', this)">Support N2</button>
+    </div>
+
+    <section class="grid">
+        <article class="card" data-category="reseau">
+            <span class="company-tag">Infrastructure Réseau</span>
+            <i class="fas fa-network-wired card-icon"></i>
+            <h3>Densification du Réseau LAN</h3>
+            <div class="tags">
+                <span class="tag-small">Cisco</span>
+                <span class="tag-small">Switchs L3</span>
+                <span class="tag-small">Brassage</span>
+                <span class="tag-small">VLAN</span>
+            </div>
+            <p>Installation et configuration de commutateurs L3 dans le cadre du renforcement du réseau départemental DIRCOFI. Brassage des baies, paramétrage des VLANs et vérification de la connectivité.</p>
+            <span class="btn-card disabled">Documentation interne <i class="fas fa-lock"></i></span>
+        </article>
+
+        <article class="card" data-category="toip">
+            <span class="company-tag">Téléphonie sur IP</span>
+            <i class="fas fa-phone-volume card-icon"></i>
+            <h3>Migration Téléphonie Analogique → ToIP</h3>
+            <div class="tags">
+                <span class="tag-small">ToIP</span>
+                <span class="tag-small">SIP</span>
+                <span class="tag-small">IPBX</span>
+                <span class="tag-small">Keyyo</span>
+            </div>
+            <p>Transition complète de la téléphonie analogique existante vers une infrastructure Voix sur IP. Configuration des postes IP, paramétrage du trunk SIP et tests de qualité de service (QoS).</p>
+            <span class="btn-card disabled">Documentation interne <i class="fas fa-lock"></i></span>
+        </article>
+
+        <article class="card" data-category="support">
+            <span class="company-tag">Support & Exploitation</span>
+            <i class="fas fa-headset card-icon"></i>
+            <h3>Gestion Incidents Réseau — Niveau 2</h3>
+            <div class="tags">
+                <span class="tag-small">Incidents N2</span>
+                <span class="tag-small">Supervision</span>
+                <span class="tag-small">Diagnostic</span>
+            </div>
+            <p>Prise en charge des incidents réseau escaladés en niveau 2 : diagnostics de connectivité, analyse des logs commutateurs, remplacement de matériels défaillants et suivi de résolution.</p>
+            <span class="btn-card disabled">Documentation interne <i class="fas fa-lock"></i></span>
+        </article>
+    </section>
+</main>
+
+<footer>
+    <div class="footer-top">
+        <div class="footer-col">
+            <div class="footer-logo">Nicolas<span>.SI</span></div>
+            <p style="font-size: 0.9rem; color: var(--text-muted);">Expert Architecture SI spécialisé dans la conception d'infrastructures hautement disponibles.</p>
+        </div>
+        <div class="footer-col">
+            <h4>Navigation</h4>
+            <ul>
+                <li><a href="https://nblinpro.github.io/portfolio/index.html">Accueil</a></li>
+                <li><a href="https://nblinpro.github.io/portfolio/pages/parcours.html">Parcours</a></li>
+                <li><a href="https://nblinpro.github.io/portfolio/pages/projets.html">Projets</a></li>
+                <li><a href="https://nblinpro.github.io/portfolio/pages/contact.html">Contact</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Contact</h4>
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/nicolas-blin-6a5135218/" class="social-btn" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                <a href="mailto:nicolas.blin.pro1@gmail.com" class="social-btn"><i class="far fa-envelope"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>© 2026 Nicolas Blin | Expert Architecture SI</p></div>
+</footer>
+
+<script>
+    function filterProjects(category, button) {
+        const cards = document.querySelectorAll('.card');
+        const buttons = document.querySelectorAll('.filter-btn');
+
+        buttons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+
+        cards.forEach(card => {
+            if (category === 'all' || card.getAttribute('data-category') === category) {
+                card.classList.remove('hidden');
+                setTimeout(() => card.style.opacity = '1', 10);
+            } else {
+                card.style.opacity = '0';
+                setTimeout(() => card.classList.add('hidden'), 300);
+            }
+        });
+    }
+</script>
+
+</body>
+</html>
